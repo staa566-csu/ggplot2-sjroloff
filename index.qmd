@@ -1,0 +1,38 @@
+---
+title: "ggplot-Assignment1"
+author: "Samantha J Roloff"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+gov_df<-read_csv('C:/Users/werol/OneDrive/Desktop/Samantha/governor_state_toplines_2022.csv', show_col_types = FALSE)
+
+#head(gov_df)
+#decide if the state is likely to have a democrat or republican governor
+gov_df$Governorship_leans <- with(gov_df, ifelse(winner_Rparty < winner_Dparty, 'Democrat', 'Republican'))
+ 
+# #filter to a specific date
+date<-'9/17/2022'
+gov_df_91722 <- filter(gov_df, forecastdate == date)
+gov_df_91722 <- filter(gov_df_91722, expression == '_lite')
+
+gov_df_91722
+
+
+
+#Question: In states where the vpi is high, that is an individual vote will determine the outcome of the senate race, and the tipping point is high, that is chance that the seat is the tipping point for control of the race, are the governors more likely to be Democrat or Republican?
+
+ggplot(data = gov_df_91722, mapping = aes(mean_predicted_turnout, tipping))+ geom_point(aes(color=Governorship_leans))+scale_color_manual(values = c("Democrat" = "blue", "Republican" = "red"))+theme_bw()+ggtitle("In states where the tipping point of the senate race is high, 
+the race for the governorship leans Democratic.")+labs(x="Mean Predicted Turnout for the State Senate Race", y='Chance that the Seat is 
+the Tipping Point for Control of the Senate' )
+
+```
