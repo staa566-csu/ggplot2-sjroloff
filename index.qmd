@@ -17,7 +17,7 @@ When you click the **Render** button a document will be generated that includes 
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
-gov_df<-readr::read_csv('C:/Users/werol/OneDrive/Desktop/Samantha/governor_state_toplines_2022.csv', show_col_types = FALSE)
+gov_df<-readr::read_csv('governor_state_toplines_2022.csv', show_col_types = FALSE)
 
 #head(gov_df)
 #decide if the state is likely to have a democrat or republican governor
